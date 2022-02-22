@@ -1,0 +1,37 @@
+server:
+  port: 8200
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/community?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: '1234!'
+  devtools:
+    remote:
+      restart:
+        enabled: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    jdbc:
+      audit: off
+      connection: off
+      resultset: off
+      resultsettable: info
+      sqlonly: info
+      sqltiming: info
+    root: info
+    com:
+      practice:
+        excel: debug
+  config: classpath:logback-${spring.profiles.active}.xml
