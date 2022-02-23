@@ -1,2 +1,2 @@
-# Spring-Data-Elasticsearch
-⭐ personal toy project
+# ♻ Spring-Data-Elasticsearch
+
