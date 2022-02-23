@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -28,11 +30,16 @@ class TestControllerTest {
 
     @Test
     @DisplayName(value = "Test enter TestController")
-    void intro() throws Exception {
-        String contents = "{\\\"title\\\": \\\"Spring Data Elasticsearch\\\"}";
-        mockMvc.perform(get("/api/v1/test")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(contents))
+    void test() throws Exception {
+        MultiValueMap<String, String> content = new LinkedMultiValueMap<>();
+        content.set("title", "Spring Data Elasticsearch");
+
+        mockMvc.perform(
+                get("/api/v1/test")
+                        .params(content)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().isOk())
                 .andExpect(content().string("Welcome to Spring Data Elasticsearch intro."))
                 .andDo(print());
