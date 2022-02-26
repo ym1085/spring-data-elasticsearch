@@ -2,6 +2,7 @@ package com.elasticsearch.controller;
 
 import com.elasticsearch.document.Person;
 import com.elasticsearch.document.Vehicle;
+import com.elasticsearch.search.SearchRequestDto;
 import com.elasticsearch.service.PersonService;
 import com.elasticsearch.service.VehicleService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/vehicle")
@@ -29,5 +32,11 @@ public class VehicleController {
     public ResponseEntity<Vehicle> getById(@PathVariable final String id) {
         log.info("id = {}", id);
         return new ResponseEntity<>(vehicleService.getById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/search")
+    public List<Vehicle> search(@RequestBody final SearchRequestDto searchRequestDto) {
+        log.info("searchRequestDto = {}", searchRequestDto.toString());
+        return vehicleService.search(searchRequestDto);
     }
 }
