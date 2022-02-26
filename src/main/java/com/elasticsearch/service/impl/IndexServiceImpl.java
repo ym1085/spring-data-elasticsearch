@@ -3,6 +3,7 @@ package com.elasticsearch.service.impl;
 import com.elasticsearch.helper.IndexMappingUtils;
 import com.elasticsearch.helper.IndicesHelper;
 import lombok.RequiredArgsConstructor;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
@@ -25,8 +26,10 @@ public class IndexServiceImpl {
 
     @PostConstruct
     public void createIndices() {
-        final String path = "static/indices/mappings/";
-        final String ext = ".json";
+        recreateIndices(false);
+    }
+
+    private void recreateIndices(boolean deleteExisting) {
         final String settings = IndexMappingUtils.loadAsString("static/indices/es-settings.json");
 
 //        Create Index
@@ -36,23 +39,33 @@ public class IndexServiceImpl {
                         .indices()
                         .exists(new GetIndexRequest(indexName), RequestOptions.DEFAULT);
                 if (isIndexExists) {
-                    continue;
-                }
-
-                final String mappings = IndexMappingUtils.loadAsString(path + indexName + ext);
-                if (settings == null || mappings == null) {
-                    log.error("Failed to create index with name = {}", indexName);
-                    continue;
+                    if (!deleteExisting) {
+                        continue;
+                    }
+                    client.indices().delete(new DeleteIndexRequest(indexName), RequestOptions.DEFAULT); // Delete index
                 }
 
                 final CreateIndexRequest createIndexRequest = new CreateIndexRequest(indexName);
                 createIndexRequest.settings(settings, XContentType.JSON);
-                createIndexRequest.mapping(mappings, XContentType.JSON);
+
+                final String mappings = loadMappings(indexName);
+                if (mappings != null) {
+                    createIndexRequest.mapping(mappings, XContentType.JSON);
+                }
 
                 client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
             } catch (final Exception e) {
                 log.error(e.getMessage(), e);
             }
         }
+    }
+
+    private String loadMappings(String indexName) {
+        final String mappings = IndexMappingUtils.loadAsString("static/indices/mappings/" + indexName + ".json");
+        if (mappings == null) {
+            log.error("Failed to load mappings for index with name = {}", indexName);
+            return null;
+        }
+        return mappings;
     }
 }
