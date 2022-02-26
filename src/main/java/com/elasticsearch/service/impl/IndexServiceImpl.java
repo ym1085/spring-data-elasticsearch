@@ -2,6 +2,7 @@ package com.elasticsearch.service.impl;
 
 import com.elasticsearch.helper.IndexMappingUtils;
 import com.elasticsearch.helper.IndicesHelper;
+import com.elasticsearch.service.IndexService;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.client.RequestOptions;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class IndexServiceImpl {
+public class IndexServiceImpl implements IndexService {
     private final Logger log = LoggerFactory.getLogger(IndexServiceImpl.class);
 
     private final List<String> INDICES_TO_CREATE = List.of(IndicesHelper.VEHICLE_IDX);
@@ -29,11 +30,14 @@ public class IndexServiceImpl {
         recreateIndices(false);
     }
 
-    private void recreateIndices(boolean deleteExisting) {
+    @Override
+    public void recreateIndices(boolean deleteExisting) {
+        log.debug("recreateIndices ==> deleteExisting = {}", deleteExisting);
         final String settings = IndexMappingUtils.loadAsString("static/indices/es-settings.json");
 
 //        Create Index
         for (final String indexName : INDICES_TO_CREATE) {
+            log.info("indexName = {}", indexName);
             try {
                 boolean isIndexExists = client
                         .indices()
@@ -42,6 +46,7 @@ public class IndexServiceImpl {
                     if (!deleteExisting) {
                         continue;
                     }
+                    log.warn("Checking this line, deleteExisting = {}", true);
                     client.indices().delete(new DeleteIndexRequest(indexName), RequestOptions.DEFAULT); // Delete index
                 }
 
@@ -52,7 +57,7 @@ public class IndexServiceImpl {
                 if (mappings != null) {
                     createIndexRequest.mapping(mappings, XContentType.JSON);
                 }
-
+                log.info("createIndexRequest = {}", createIndexRequest);
                 client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
             } catch (final Exception e) {
                 log.error(e.getMessage(), e);

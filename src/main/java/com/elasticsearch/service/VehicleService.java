@@ -1,11 +1,15 @@
 package com.elasticsearch.service;
 
 import com.elasticsearch.document.Vehicle;
+import com.elasticsearch.search.SearchRequestDto;
+
+import java.util.List;
 
 public interface VehicleService {
 
-    Vehicle getById(String id);
-
     Boolean createDocumentToIndex(Vehicle vehicle);
 
+    Vehicle getById(String id);
+
+    List<Vehicle> search(SearchRequestDto searchRequestDto);
 }
