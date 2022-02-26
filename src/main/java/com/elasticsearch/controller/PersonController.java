@@ -1,7 +1,7 @@
 package com.elasticsearch.controller;
 
 import com.elasticsearch.document.Person;
-import com.elasticsearch.service.impl.PersonService;
+import com.elasticsearch.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/person")
 @RequiredArgsConstructor
 public class PersonController {
-
-    final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(PersonController.class);
 
     private final PersonService personService;
 
@@ -26,7 +25,7 @@ public class PersonController {
 
     @PostMapping
     public void save(@RequestBody final Person person) {
-        log.info("person = {}", person);
+        log.info("person = {}", person.toString());
         personService.save(person);
     }
 }
