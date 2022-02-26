@@ -1,4 +1,4 @@
-package com.elasticsearch.service.impl;
+package com.elasticsearch.service;
 
 import com.elasticsearch.document.Person;
 

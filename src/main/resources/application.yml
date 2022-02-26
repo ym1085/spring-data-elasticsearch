@@ -35,6 +35,5 @@ logging:
       sqltiming: info
     root: info
     com:
-      practice:
-        excel: debug
+      elasticsearch: debug
   config: classpath:logback-${spring.profiles.active}.xml
