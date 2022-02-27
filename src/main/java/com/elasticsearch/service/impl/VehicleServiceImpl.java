@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -80,10 +81,24 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public List<Vehicle> search(SearchRequestDto searchRequestDto) {
-        // create a builder query
-        SearchRequest request = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_IDX, searchRequestDto);
+    public List<Vehicle> searchByMatchQuery(SearchRequestDto searchRequestDto) {
+        SearchRequest request
+                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_IDX, searchRequestDto); // create query builder obj
         log.info("request = {}", request.toString());
+
+        return searchInternal(request);
+    }
+
+    @Override
+    public List<Vehicle> searchByDate(Date date) {
+        SearchRequest request
+                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_IDX, "created_at", date); // create query builder obj
+        log.info("request = {}", request.toString());
+
+        return searchInternal(request);
+    }
+
+    private List<Vehicle> searchInternal(final SearchRequest request) {
         if (request == null) {
             log.error("Failed to build search request query");
             return Collections.emptyList();

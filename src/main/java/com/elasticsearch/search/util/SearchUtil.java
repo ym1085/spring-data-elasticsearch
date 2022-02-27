@@ -12,6 +12,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class SearchUtil {
     public static SearchRequest buildSearchRequest(final String indexName, final SearchRequestDto searchRequestDto) {
         SearchRequest request = null;
         try {
-            SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(searchRequestDto));
+            final SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(searchRequestDto));
 
 //            정렬 조건 추가
             if (searchRequestDto.getSortBy() != null) {
@@ -44,7 +45,20 @@ public class SearchUtil {
         return request;
     }
 
-    /* create query builder */
+    public static SearchRequest buildSearchRequest(final String indexName, final String field, final Date date) {
+        try {
+            final SearchSourceBuilder builder
+                    = new SearchSourceBuilder().postFilter(getQueryBuilder(field, date));
+
+            SearchRequest request = new SearchRequest(indexName);
+            request.source(builder);
+            return request;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private static QueryBuilder getQueryBuilder(final SearchRequestDto searchRequestDto) {
         if (ObjectUtils.isEmpty(searchRequestDto)) {
             return null;
@@ -74,5 +88,9 @@ public class SearchUtil {
                     QueryBuilders.matchQuery(field, searchRequestDto.getSearchTerm()) // 단일 필드 조회
                             .operator(Operator.AND))
                 .orElse(null);
+    }
+
+    private static QueryBuilder getQueryBuilder(final String field, final Date date) {
+        return QueryBuilders.rangeQuery(field).gte(date);
     }
 }
