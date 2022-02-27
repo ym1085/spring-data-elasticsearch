@@ -3,8 +3,17 @@
     "id" : {
       "type" : "keyword"
     },
-    "number" : {
+    "vehicle_number" : {
       "type" : "text"
+    },
+    "vehicle_name" : {
+      "type" : "text"
+    },
+    "created_at" : {
+      "type" : "date"
+    },
+    "updated_at" : {
+      "type" : "date"
     }
   }
 }

@@ -35,7 +35,6 @@ public class IndexServiceImpl implements IndexService {
         log.debug("recreateIndices ==> deleteExisting = {}", deleteExisting);
         final String settings = IndexMappingUtils.loadAsString("static/indices/es-settings.json");
 
-//        Create Index
         for (final String indexName : INDICES_TO_CREATE) {
             log.info("indexName = {}", indexName);
             try {
@@ -46,8 +45,8 @@ public class IndexServiceImpl implements IndexService {
                     if (!deleteExisting) {
                         continue;
                     }
-                    log.warn("Checking this line, deleteExisting = {}", true);
-                    client.indices().delete(new DeleteIndexRequest(indexName), RequestOptions.DEFAULT); // Delete index
+                    log.warn("deleteExisting = {}", true);
+                    client.indices().delete(new DeleteIndexRequest(indexName), RequestOptions.DEFAULT); // delete index
                 }
 
                 final CreateIndexRequest createIndexRequest = new CreateIndexRequest(indexName);
@@ -57,8 +56,8 @@ public class IndexServiceImpl implements IndexService {
                 if (mappings != null) {
                     createIndexRequest.mapping(mappings, XContentType.JSON);
                 }
-                log.info("createIndexRequest = {}", createIndexRequest);
-                client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
+                log.info("createIndexRequest = {}", createIndexRequest.toString());
+                client.indices().create(createIndexRequest, RequestOptions.DEFAULT); // create index
             } catch (final Exception e) {
                 log.error(e.getMessage(), e);
             }

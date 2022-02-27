@@ -29,9 +29,9 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getById(@PathVariable final String id) {
+    public ResponseEntity<Vehicle> findById(@PathVariable final String id) {
         log.info("id = {}", id);
-        return new ResponseEntity<>(vehicleService.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(vehicleService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping("/search")
