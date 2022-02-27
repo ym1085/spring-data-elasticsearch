@@ -9,7 +9,7 @@ public interface VehicleService {
 
     Boolean createDocumentToIndex(Vehicle vehicle);
 
-    Vehicle getById(String id);
+    Vehicle findById(String id);
 
     List<Vehicle> search(SearchRequestDto searchRequestDto);
 }

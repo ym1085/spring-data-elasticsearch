@@ -63,7 +63,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public Vehicle getById(final String vehicleId) {
+    public Vehicle findById(final String vehicleId) {
         log.debug("vehicleId = {}", vehicleId);
         try {
             final GetResponse response = client.get(new GetRequest(IndicesHelper.VEHICLE_IDX, vehicleId), RequestOptions.DEFAULT);

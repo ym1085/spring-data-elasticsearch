@@ -12,7 +12,8 @@ import javax.persistence.Id;
 
 @Document(indexName = IndicesHelper.PERSON_IDX)
 @Setting(settingPath = "static/indices/es-settings.json")
-@Getter @Setter
+@Getter
+@Setter
 public class Person {
 
     @Id
