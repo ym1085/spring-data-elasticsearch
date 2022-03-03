@@ -11,7 +11,8 @@ spring:
     url: jdbc:mysql://localhost:3306/community?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: '1234!'
+    password: '!1234' # mac
+#    password: '1234!' # window
   devtools:
     remote:
       restart:
