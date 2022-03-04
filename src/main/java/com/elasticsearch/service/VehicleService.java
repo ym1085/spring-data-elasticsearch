@@ -12,7 +12,9 @@ public interface VehicleService {
 
     Vehicle findById(String id);
 
-    List<Vehicle> searchByMatchQuery(SearchRequestDto searchRequestDto);
+    List<Vehicle> searchByMatchOrMultiMatchQuery(SearchRequestDto searchRequestDto);
 
     List<Vehicle> searchByDate(Date date);
+
+    List<Vehicle> searchByContentsAndDate(SearchRequestDto searchRequestDto, Date date);
 }

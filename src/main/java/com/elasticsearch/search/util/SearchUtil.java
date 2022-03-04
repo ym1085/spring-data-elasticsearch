@@ -3,6 +3,7 @@ package com.elasticsearch.search.util;
 import com.elasticsearch.search.SearchRequestDto;
 import lombok.NoArgsConstructor;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -28,14 +29,12 @@ public class SearchUtil {
         try {
             final SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(searchRequestDto));
 
-//            정렬 조건 추가
-            if (searchRequestDto.getSortBy() != null) {
+            if (searchRequestDto.getSortBy() != null) { // 정렬 수행
                 builder.sort(
                         searchRequestDto.getSortBy(), // 정렬 조건 필드
                         searchRequestDto.getOrder() != null ? searchRequestDto.getOrder() : SortOrder.ASC // 정렬 방법
                 );
             }
-
             request = new SearchRequest(indexName);
             request.source(builder);
         } catch (Exception e) {
@@ -47,8 +46,7 @@ public class SearchUtil {
 
     public static SearchRequest buildSearchRequest(final String indexName, final String field, final Date date) {
         try {
-            final SearchSourceBuilder builder
-                    = new SearchSourceBuilder().postFilter(getQueryBuilder(field, date));
+            final SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(field, date));
 
             SearchRequest request = new SearchRequest(indexName);
             request.source(builder);
@@ -57,6 +55,36 @@ public class SearchUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static SearchRequest buildSearchRequest(final String indexName, final SearchRequestDto searchRequestDto, final Date date) {
+        SearchRequest request = null;
+        try {
+            final QueryBuilder searchQueryBuilder = getQueryBuilder(searchRequestDto);
+            final QueryBuilder dateQueryBuilder = getQueryBuilder("created_at", date);
+
+            final BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+                .must(searchQueryBuilder)
+                .must(dateQueryBuilder);
+
+            SearchSourceBuilder builder = new SearchSourceBuilder()
+                .postFilter(boolQuery);
+
+//            정렬 조건 추가
+            if (searchRequestDto.getSortBy() != null) {
+                builder.sort(
+                    searchRequestDto.getSortBy(), // 정렬 조건 필드
+                    searchRequestDto.getOrder() != null ? searchRequestDto.getOrder() : SortOrder.ASC // 정렬 방법
+                );
+            }
+
+            request = new SearchRequest(indexName);
+            request.source(builder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request = null;
+        }
+        return request;
     }
 
     private static QueryBuilder getQueryBuilder(final SearchRequestDto searchRequestDto) {
