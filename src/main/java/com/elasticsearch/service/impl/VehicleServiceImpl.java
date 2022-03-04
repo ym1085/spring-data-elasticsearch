@@ -6,6 +6,11 @@ import com.elasticsearch.search.SearchRequestDto;
 import com.elasticsearch.search.util.SearchUtil;
 import com.elasticsearch.service.VehicleService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
@@ -13,7 +18,6 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.Request;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
@@ -23,23 +27,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService {
     private final Logger log = LoggerFactory.getLogger(VehicleServiceImpl.class);
 
-    private static final ObjectMapper mapper = new ObjectMapper(); // high cost
+    private static final ObjectMapper mapper = new ObjectMapper();
     private final RestHighLevelClient client;
 
     /**
-     * Document를 지정한 인덱스에 생성한다.
-     * Document는 String 형태로 기술한다.
+     * Document를 지정한 인덱스에 생성하며, Document는 String 형태로 기술한다.
      *
      * @desc
      *      IndexRequest 클래스는 문서 생성을 담당하며,
@@ -63,6 +60,11 @@ public class VehicleServiceImpl implements VehicleService {
         }
     }
 
+    /**
+     * 차량 번호 기반 조회
+     *
+     * @param vehicleId
+     */
     @Override
     public Vehicle findById(final String vehicleId) {
         log.debug("vehicleId = {}", vehicleId);
@@ -80,21 +82,46 @@ public class VehicleServiceImpl implements VehicleService {
         }
     }
 
+    /**
+     * match query 기반 검색
+     *
+     * @param searchRequestDto
+     */
     @Override
-    public List<Vehicle> searchByMatchQuery(SearchRequestDto searchRequestDto) {
-        SearchRequest request
-                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_IDX, searchRequestDto); // create query builder obj
-        log.info("request = {}", request.toString());
+    public List<Vehicle> searchByMatchOrMultiMatchQuery(final SearchRequestDto searchRequestDto) {
+        final SearchRequest request = SearchUtil.buildSearchRequest(
+            IndicesHelper.VEHICLE_IDX,
+            searchRequestDto
+        );
 
+        log.info("request = {}", request.toString());
+        return searchInternal(request);
+    }
+
+    /**
+     * 날짜 기반 검색
+     *
+     * @param date
+     */
+    @Override
+    public List<Vehicle> searchByDate(final Date date) {
+        final SearchRequest request = SearchUtil.buildSearchRequest(
+            IndicesHelper.VEHICLE_IDX,
+            "created_at",
+            date
+        );
+
+        log.info("request = {}", request.toString());
         return searchInternal(request);
     }
 
     @Override
-    public List<Vehicle> searchByDate(Date date) {
-        SearchRequest request
-                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_IDX, "created_at", date); // create query builder obj
-        log.info("request = {}", request.toString());
-
+    public List<Vehicle> searchByContentsAndDate(final SearchRequestDto searchRequestDto, final Date date) {
+        final SearchRequest request = SearchUtil.buildSearchRequest(
+            IndicesHelper.VEHICLE_IDX,
+            searchRequestDto,
+            date
+        );
         return searchInternal(request);
     }
 
