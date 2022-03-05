@@ -38,7 +38,7 @@ public class UserRequestDto {
 
     @NotNull
     @PastOrPresent
-    private String createdAt;
+    private Date createdAt;
 
     @NotNull
     @PastOrPresent
@@ -50,7 +50,7 @@ public class UserRequestDto {
                           String userId,
                           String userPhoneNum,
                           String userAddress,
-                          String createdAt,
+                          Date createdAt,
                           Date updatedAt) {
         this.id = id;
         this.userName = userName;

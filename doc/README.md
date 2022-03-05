@@ -27,3 +27,14 @@
   - 없으면 new User() 객체 반환.
 - 회원 등록 소스 수정 시작. 17:27
   - API에서 json 형태로 데이터 기재 후 요청하면 색인하도록 구현. 18:39
+- Date 타입이 string으로 되있는 부분 발견 -> side effect 여부 체크
+  - 체크 완료 -> 이상 없음 23:50
+
+### 차량 관리쪽 소스 리팩토링
+
+- 샘플 데이터 등록하는 Controller를 따로 분리(DummyDataController)하여 데이터 삽입.
+- vehicle.json, user.json DTO 포맷에 맞게 camelcase로 수정.
+  - Array > Json 형태로 변경
+- 샘플 데이터 등록 확인 완료 23:54
+  - user
+  - vehicle

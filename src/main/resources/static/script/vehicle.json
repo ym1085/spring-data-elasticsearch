@@ -1,0 +1,103 @@
+[
+    {
+      "id" : "1",
+      "vehicleNumber" : "AAA-123",
+      "vehicleName" : "Audi A1",
+      "vehicleColor" : "red",
+      "vehicleRemainAmount" : "142",
+      "vehiclePrice" : "$58,990",
+      "updatedAt": "2010-01-01",
+      "createdAt" : "2010-01-01"
+    },
+    {
+      "id" : "2",
+      "vehicleNumber" : "AAB-123",
+      "vehicleName" : "Audi A3",
+      "vehicleColor" : "black",
+      "vehicleRemainAmount" : "1023",
+      "vehiclePrice" : "$68,990",
+      "updatedAt": "2011-07-05",
+      "createdAt" : "2011-07-05"
+    },
+    {
+      "id" : "3",
+      "vehicleNumber" : "AAC-123",
+      "vehicleName" : "Audi A3",
+      "vehicleColor" : "light gray",
+      "vehicleRemainAmount" : "998",
+      "vehiclePrice" : "$67,990",
+      "updatedAt": "2012-10-03",
+      "createdAt" : "2012-10-03"
+    },
+    {
+      "id" : "4",
+      "vehicleNumber" : "AAA-023",
+      "vehicleName" : "BMW M3",
+      "vehicleColor" : "blue",
+      "vehicleRemainAmount" : "15",
+      "vehiclePrice" : "$88,990",
+      "updatedAt": "2021-10-06",
+      "createdAt" : "2021-10-06"
+    },
+    {
+      "id" : "5",
+      "vehicleNumber" : "1AA-023",
+      "vehicleName" : "BMW 3",
+      "vehicleColor" : "heavy black",
+      "vehicleRemainAmount" : "545",
+      "vehiclePrice" : "$58,990",
+      "updatedAt": "2001-10-01",
+      "createdAt" : "2001-10-01"
+    },
+    {
+      "id" : "6",
+      "vehicleNumber" : "12A-023",
+      "vehicleName" : "BMW M5",
+      "vehicleColor" : "blue",
+      "vehicleRemainAmount" : "201",
+      "vehiclePrice" : "$98,990",
+      "updatedAt": "1999-05-08",
+      "createdAt" : "1999-05-08"
+    },
+    {
+      "id" : "7",
+      "vehicleNumber" : "42A-023",
+      "vehicleName" : "VW Golf",
+      "vehicleColor" : "rainbow",
+      "vehicleRemainAmount" : "123",
+      "vehiclePrice" : "$108,990",
+      "updatedAt": "1991-04-08",
+      "createdAt" : "1991-04-08"
+    },
+    {
+      "id" : "8",
+      "vehicleNumber" : "18A-023",
+      "vehicleName" : "VW Passat",
+      "vehicleColor" : "yellow bric",
+      "vehicleRemainAmount" : "55",
+      "vehiclePrice" : "$128,990",
+      "updatedAt": "2021-04-08",
+      "createdAt" : "2021-04-08"
+    },
+    {
+      "id" : "9",
+      "vehicleNumber" : "28A-023",
+      "vehicleName" : "Skoda Kodiaq",
+      "vehicleColor" : "brown",
+      "vehicleRemainAmount" : "908",
+      "vehiclePrice" : "$78,990",
+      "updatedAt": "2020-01-04",
+      "createdAt" : "2020-01-04"
+    },
+    {
+      "id" : "10",
+      "vehicleNumber" : "88A-023",
+      "vehicleName" : "Skoda Yeti",
+      "vehicleColor" : "white",
+      "vehicleRemainAmount" : "78",
+      "vehiclePrice" : "$228,990",
+      "updatedAt": "2015-03-09",
+      "createdAt" : "2015-03-09"
+    }
+]
+

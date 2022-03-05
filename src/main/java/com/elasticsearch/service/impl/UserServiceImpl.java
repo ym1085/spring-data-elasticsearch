@@ -31,7 +31,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean saveDocumentToIndex(final UserRequestDto userRequestDto) {
         User userEntity = userRequestDto.toEntity();
-        log.debug("userEntity.getId = {}", userEntity.getId());
 
         try {
             final String userJsonObj = mapper.writeValueAsString(userEntity);
