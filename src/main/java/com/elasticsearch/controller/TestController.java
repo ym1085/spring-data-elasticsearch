@@ -11,8 +11,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1")
 public class TestController {
-
-    final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping(value = "/test")
     public String intro(@RequestParam String title) {
