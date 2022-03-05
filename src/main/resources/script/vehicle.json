@@ -1,0 +1,47 @@
+{
+  "vehicle" : [
+    {
+      "updated_at": "2019-09-12",
+      "created_at" : "2019-09-12",
+      "vehicle_name" : "Audi A3",
+      "vehicle_number" : "5523434"
+    },
+    {
+      "updated_at": "2020-09-12",
+      "created_at" : "2020-09-12",
+      "vehicle_name" : "Audi A5",
+      "vehicle_number" : "2233454"
+    },
+    {
+      "updated_at": "2018-09-12",
+      "created_at" : "2018-09-12",
+      "vehicle_name" : "Audi A7",
+      "vehicle_number" : "1234565"
+    },
+    {
+      "updated_at": "2012-02-23",
+      "created_at" : "2012-02-23",
+      "vehicle_name" : "Benz Cupe",
+      "vehicle_number" : "4445556"
+    },
+    {
+      "updated_at": "1999-04-21",
+      "created_at" : "1999-04-21",
+      "vehicle_name" : "Benz King",
+      "vehicle_number" : "4546667"
+    },
+    {
+      "updated_at": "2004-08-23",
+      "created_at" : "2004-08-23",
+      "vehicle_name" : "Benz Hibrid",
+      "vehicle_number" : "9988778"
+    },
+    {
+      "updated_at": "2014-03-13",
+      "created_at" : "2014-03-13",
+      "vehicle_name" : "Sonata Hibrid",
+      "vehicle_number" : "9989334"
+    }
+  ]
+}
+

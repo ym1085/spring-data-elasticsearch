@@ -24,9 +24,15 @@ import java.util.Map;
 public class IndexServiceImpl implements IndexService {
     private final Logger log = LoggerFactory.getLogger(IndexServiceImpl.class);
 
-    private static final List<String> INDICES_TO_CREATE = List.of(IndicesHelper.VEHICLE_IDX, IndicesHelper.PERSON_IDX);
+    private static final List<String> INDICES_TO_CREATE = List.of(IndicesHelper.VEHICLE_INDEX_NAME, IndicesHelper.USER_INDEX_NAME);
     private final RestHighLevelClient client;
 
+    /**
+     * 인덱스 재생성
+     *
+     * @param paramMap isRecreateIndexYn : [boolean] 재새성 여부
+     * @param paramMap deleteIndexName : [boolean] 삭제할 인덱스명
+     */
     @Override
     public void recreateIndices(final Map<String, Object> paramMap) {
         final String settings = IndexMappingUtils.loadAsString("static/indices/es-settings.json");

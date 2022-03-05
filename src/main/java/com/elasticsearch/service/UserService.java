@@ -1,11 +1,12 @@
 package com.elasticsearch.service;
 
 import com.elasticsearch.document.User;
+import com.elasticsearch.dto.request.UserRequestDto;
 
 public interface UserService {
 
-    User findById(String id);
+    Boolean saveDocumentToIndex(UserRequestDto userRequestDto);
 
-    void save(User user);
+    User findById(UserRequestDto userRequestDto);
 
 }

@@ -1,6 +1,7 @@
 package com.elasticsearch.controller;
 
 import com.elasticsearch.document.User;
+import com.elasticsearch.dto.request.UserRequestDto;
 import com.elasticsearch.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -17,15 +18,15 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> findById(@PathVariable final String id) {
-        log.info("id = {}", id);
-        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+    @GetMapping(value = "/user")
+    public ResponseEntity<User> findById(@RequestBody final UserRequestDto userRequestDto) {
+        log.info("userRequestDto = {}", userRequestDto.toString());
+        return ResponseEntity.ok().body(userService.findById(userRequestDto));
     }
 
-    @PostMapping("/user")
-    public void save(@RequestBody final User user) {
-        log.info("user = {}", user.toString());
-        userService.save(user);
+    @PostMapping(value = "/user")
+    public ResponseEntity<Boolean> saveDocumentToIndex(@RequestBody final UserRequestDto userRequestDto) {
+        log.info("userRequestDto = {}", userRequestDto.toString());
+        return ResponseEntity.ok().body(userService.saveDocumentToIndex(userRequestDto));
     }
 }

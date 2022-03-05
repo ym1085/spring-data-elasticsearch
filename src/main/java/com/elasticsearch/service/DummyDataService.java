@@ -1,6 +1,6 @@
 package com.elasticsearch.service;
 
-public interface VehicleDummyDataService {
+public interface DummyDataService {
 
     void insertDummyDataToIndex();
 
