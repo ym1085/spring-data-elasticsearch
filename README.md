@@ -2,7 +2,7 @@
 
 ### 1. Introduction
 
-Use Spring Boots and Elastic Search to implement search API
+Use SpringBoots and Elasticsearch to implement search API
 
 ### 2. Version Info
 
