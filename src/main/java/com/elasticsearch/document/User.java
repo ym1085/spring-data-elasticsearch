@@ -6,13 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-//@Document(indexName = IndicesHelper.USER_INDEX_NAME)
-//@Setting(settingPath = "static/indices/es-settings.json")
 @Data
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonPropertyOrder(value = {"id", "userName", "userId", "userPhoneNum", "userAddress", "created_at", "updatedAt"})
@@ -35,10 +36,26 @@ public class User {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("created_at")
-    private String created_at;
+    private String createdAt;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("updated_at")
     private Date updatedAt;
 
+    @Builder
+    public User(String id,
+                String userName,
+                String userId,
+                String userPhoneNum,
+                String userAddress,
+                String createdAt,
+                Date updatedAt) {
+        this.id = id;
+        this.userName = userName;
+        this.userId = userId;
+        this.userPhoneNum = userPhoneNum;
+        this.userAddress = userAddress;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }

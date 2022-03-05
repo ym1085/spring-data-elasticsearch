@@ -3,13 +3,12 @@ package com.elasticsearch.helper;
 /**
  * 인덱스명을 따로 관리하기 위한 클래스입니다.
  *
- * @author youngminkim
- * @version 0.2.0
- * @date 2022.03.04
+ * @author ymkim
+ * @since 2022.03.05 Sun 14:23
  */
 public final class IndicesHelper {
 
-    public static final String PERSON_IDX = "person";
-    public static final String VEHICLE_IDX = "vehicle";
+    public static final String USER_INDEX_NAME = "user";
+    public static final String VEHICLE_INDEX_NAME = "vehicle";
 
 }
