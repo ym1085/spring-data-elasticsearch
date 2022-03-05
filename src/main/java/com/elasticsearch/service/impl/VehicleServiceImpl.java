@@ -1,6 +1,7 @@
 package com.elasticsearch.service.impl;
 
 import com.elasticsearch.document.Vehicle;
+import com.elasticsearch.dto.request.VehicleRequestDto;
 import com.elasticsearch.helper.IndicesHelper;
 import com.elasticsearch.search.SearchRequestDto;
 import com.elasticsearch.search.util.SearchUtil;
@@ -35,44 +36,34 @@ public class VehicleServiceImpl implements VehicleService {
     private static final ObjectMapper mapper = new ObjectMapper();
     private final RestHighLevelClient client;
 
-    /**
-     * Document를 지정한 인덱스에 생성하며, Document는 String 형태로 기술한다.
-     *
-     * @desc
-     *      IndexRequest 클래스는 문서 생성을 담당하며,
-     *      해당 클래스의 생성자는 인덱스명, 타입명, 문서Id를 받는다.
-     */
     @Override
-    public Boolean createDocumentToIndex(final Vehicle vehicle) {
+    public Boolean saveDocumentToIndex(final VehicleRequestDto vehicleRequestDto) {
+        Vehicle vehicleEntity = vehicleRequestDto.toEntity();
+
         try {
-            final String vehicleAsString = mapper.writeValueAsString(vehicle);
+            final String vehicleAsString = mapper.writeValueAsString(vehicleEntity);
             log.debug("vehicleAsString = {}", vehicleAsString);
 
-            IndexRequest request = new IndexRequest(IndicesHelper.VEHICLE_IDX);
-            request.id(vehicle.getId()); // Sets the id of the indexed document. If not set, will be automatically generated.
-            request.source(vehicleAsString, XContentType.JSON); // Sets the document source to index
+            IndexRequest request = new IndexRequest(IndicesHelper.VEHICLE_INDEX_NAME);
+            request.id(vehicleEntity.getId());
+            request.source(vehicleAsString, XContentType.JSON); // set document source to index
 
-            IndexResponse response = client.index(request, RequestOptions.DEFAULT); // indexing
-            return response != null && response.status().equals(RestStatus.OK);
+            IndexResponse response = client.index(request, RequestOptions.DEFAULT);
+            return response != null && response.status().equals(RestStatus.CREATED);
         } catch(Exception e) {
-            log.error(e.getMessage(), e);
+            log.error("failed to save Vehicle Document to index", e);
             return false;
         }
     }
 
-    /**
-     * 차량 번호 기반 조회
-     *
-     * @param vehicleId
-     */
     @Override
     public Vehicle findById(final String vehicleId) {
         log.debug("vehicleId = {}", vehicleId);
         try {
-            final GetResponse response = client.get(new GetRequest(IndicesHelper.VEHICLE_IDX, vehicleId), RequestOptions.DEFAULT);
+            final GetResponse response = client.get(new GetRequest(IndicesHelper.VEHICLE_INDEX_NAME, vehicleId), RequestOptions.DEFAULT);
             log.debug("response = {}", response.toString());
 
-            if (response == null || response.isSourceEmpty()) {
+            if (response.isSourceEmpty()) {
                 return new Vehicle();
             }
             return mapper.readValue(response.getSourceAsString(), Vehicle.class);
@@ -82,15 +73,10 @@ public class VehicleServiceImpl implements VehicleService {
         }
     }
 
-    /**
-     * match query 기반 검색
-     *
-     * @param searchRequestDto
-     */
     @Override
-    public List<Vehicle> searchByMatchOrMultiMatchQuery(final SearchRequestDto searchRequestDto) {
+    public List<Vehicle> searchContentsByMatchQuery(final SearchRequestDto searchRequestDto) {
         final SearchRequest request = SearchUtil.buildSearchRequest(
-            IndicesHelper.VEHICLE_IDX,
+            IndicesHelper.VEHICLE_INDEX_NAME,
             searchRequestDto
         );
 
@@ -98,15 +84,10 @@ public class VehicleServiceImpl implements VehicleService {
         return searchInternal(request);
     }
 
-    /**
-     * 날짜 기반 검색
-     *
-     * @param date
-     */
     @Override
-    public List<Vehicle> searchByDate(final Date date) {
+    public List<Vehicle> searchContentsByRangeQuery(final Date date) {
         final SearchRequest request = SearchUtil.buildSearchRequest(
-            IndicesHelper.VEHICLE_IDX,
+            IndicesHelper.VEHICLE_INDEX_NAME,
             "created_at",
             date
         );
@@ -116,9 +97,9 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public List<Vehicle> searchByContentsAndDate(final SearchRequestDto searchRequestDto, final Date date) {
+    public List<Vehicle> searchContentsByBoolQuery(final SearchRequestDto searchRequestDto, final Date date) {
         final SearchRequest request = SearchUtil.buildSearchRequest(
-            IndicesHelper.VEHICLE_IDX,
+            IndicesHelper.VEHICLE_INDEX_NAME,
             searchRequestDto,
             date
         );
@@ -133,7 +114,7 @@ public class VehicleServiceImpl implements VehicleService {
 
         List<Vehicle> vehicle = null;
         try {
-            SearchResponse response = client.search(request, RequestOptions.DEFAULT); // execute searching(query, option)
+            SearchResponse response = client.search(request, RequestOptions.DEFAULT);
             log.info("response = {}", response.toString());
 
             SearchHit[] searchHits = response.getHits().getHits(); // hits : [ { key : value } ]
@@ -145,7 +126,6 @@ public class VehicleServiceImpl implements VehicleService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        log.info("vehicle = {}", vehicle.toString());
         return vehicle;
     }
 }

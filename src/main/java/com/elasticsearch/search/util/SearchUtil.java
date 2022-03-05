@@ -16,11 +16,6 @@ import org.springframework.util.ObjectUtils;
 import java.util.Date;
 import java.util.List;
 
-/**
-    @since : 2022-02-27
-    @author: ymkim
-    @url : https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
- */
 @NoArgsConstructor
 public class SearchUtil {
 
@@ -29,10 +24,10 @@ public class SearchUtil {
         try {
             final SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(searchRequestDto));
 
-            if (searchRequestDto.getSortBy() != null) { // 정렬 수행
+            if (searchRequestDto.getSortBy() != null) {
                 builder.sort(
-                        searchRequestDto.getSortBy(), // 정렬 조건 필드
-                        searchRequestDto.getOrder() != null ? searchRequestDto.getOrder() : SortOrder.ASC // 정렬 방법
+                        searchRequestDto.getSortBy(),
+                        searchRequestDto.getOrder() != null ? searchRequestDto.getOrder() : SortOrder.ASC
                 );
             }
             request = new SearchRequest(indexName);
@@ -70,11 +65,10 @@ public class SearchUtil {
             SearchSourceBuilder builder = new SearchSourceBuilder()
                 .postFilter(boolQuery);
 
-//            정렬 조건 추가
             if (searchRequestDto.getSortBy() != null) {
                 builder.sort(
-                    searchRequestDto.getSortBy(), // 정렬 조건 필드
-                    searchRequestDto.getOrder() != null ? searchRequestDto.getOrder() : SortOrder.ASC // 정렬 방법
+                    searchRequestDto.getSortBy(), // condition field
+                    searchRequestDto.getOrder() != null ? searchRequestDto.getOrder() : SortOrder.ASC
                 );
             }
 
@@ -97,9 +91,9 @@ public class SearchUtil {
             return null;
         }
 
-        if (fields.size() > 1) { // 멀티 필드 조회
-            MultiMatchQueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(searchRequestDto.getSearchTerm())
-                    .type(MultiMatchQueryBuilder.Type.CROSS_FIELDS) // 모든 필드를 하나의 필드로 바라보고 검색
+        if (fields.size() > 1) {
+            MultiMatchQueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(searchRequestDto.getSearchTerm()) // search multi field
+                    .type(MultiMatchQueryBuilder.Type.CROSS_FIELDS)
                     .operator(Operator.AND);
 
             /*fields.forEach((n) -> {
@@ -113,7 +107,7 @@ public class SearchUtil {
         return fields.stream()
                 .findFirst()
                 .map(field ->
-                    QueryBuilders.matchQuery(field, searchRequestDto.getSearchTerm()) // 단일 필드 조회
+                    QueryBuilders.matchQuery(field, searchRequestDto.getSearchTerm()) // search single field
                             .operator(Operator.AND))
                 .orElse(null);
     }

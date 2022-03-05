@@ -36,7 +36,7 @@ public class User {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("created_at")
-    private String createdAt;
+    private Date createdAt;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("updated_at")
@@ -48,7 +48,7 @@ public class User {
                 String userId,
                 String userPhoneNum,
                 String userAddress,
-                String createdAt,
+                Date createdAt,
                 Date updatedAt) {
         this.id = id;
         this.userName = userName;

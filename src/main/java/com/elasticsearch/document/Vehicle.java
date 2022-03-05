@@ -1,22 +1,35 @@
 package com.elasticsearch.document;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 @Data
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class) // FIXME: https://github.com/FasterXML/jackson-databind/issues/2715
-@JsonPropertyOrder(value = {"id", "vehicle_number", "vehicle_name", "created_at", "updated_at"})
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@JsonPropertyOrder(
+        value = {
+                "id",
+                "vehicle_number",
+                "vehicle_name",
+                "vehicle_remain_amount",
+                "vehicle_price",
+                "created_at",
+                "updated_at"
+        }
+)
 public class Vehicle {
-//    @JsonIgnore
+
     @JsonProperty("id")
     private String id;
 
@@ -26,6 +39,16 @@ public class Vehicle {
     @JsonProperty("vehicle_name")
     private String vehicleName;
 
+    /* convert to [ 'red', 'yellow', 'black' ] */
+    @JsonProperty("vehicle_color")
+    private String vehicleColor;
+
+    @JsonProperty("vehicle_remain_amount")
+    private String vehicleRemainAmount;
+
+    @JsonProperty("vehicle_price")
+    private String vehiclePrice;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("created_at")
     private Date createdAt;
@@ -33,4 +56,23 @@ public class Vehicle {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @JsonProperty("updated_at")
     private Date updatedAt;
+
+    @Builder
+    public Vehicle(String id,
+                   String vehicleNumber,
+                   String vehicleName,
+                   String vehicleColor,
+                   String vehicleRemainAmount,
+                   String vehiclePrice,
+                   Date createdAt,
+                   Date updatedAt) {
+        this.id = id;
+        this.vehicleNumber = vehicleNumber;
+        this.vehicleName = vehicleName;
+        this.vehicleColor = vehicleColor;
+        this.vehicleRemainAmount = vehicleRemainAmount;
+        this.vehiclePrice = vehiclePrice;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }
