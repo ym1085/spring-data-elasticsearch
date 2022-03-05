@@ -1,0 +1,25 @@
+{
+  "properties" : {
+    "id" : {
+      "type" : "keyword"
+    },
+    "user_name" : {
+      "type" : "text"
+    },
+    "user_id" : {
+      "type" : "text"
+    },
+    "user_phone_num" : {
+      "type" : "text"
+    },
+    "user_address" : {
+      "type" : "text"
+    },
+    "created_at" : {
+      "type" : "date"
+    },
+    "updated_at" : {
+      "type" : "date"
+    }
+  }
+}

@@ -27,22 +27,17 @@ public class IndexController {
 
     private final IndexService indexService;
 
-    /**
-     * 특정 인덱스를 재생성 하도록 요청합니다.
-     *
-     * @param paramMap
-     */
     @GetMapping("/index")
-    public String recreateAllIndices(@RequestBody final Map<String, Object> paramMap) {
+    public ResponseEntity<String> recreateAllIndices(@RequestBody final Map<String, Object> paramMap) {
         log.info("paramMap.toString = {}", paramMap.toString());
         Map<String, Object> requestParamMap = new LinkedHashMap<>();
-        requestParamMap.put("isRecreateIndex", true);
+        requestParamMap.put("isRecreateIndexYn", true);
         requestParamMap.put("deleteIndexName", paramMap.get("deleteIndexName"));
 
 //        TODO: Response Error Message
         if (StringUtils.isNotBlank(String.valueOf(paramMap.get("deleteIndexName")))) {
             indexService.recreateIndices(requestParamMap);
         }
-        return "pass";
+        return ResponseEntity.ok().body("success");
     }
 }
