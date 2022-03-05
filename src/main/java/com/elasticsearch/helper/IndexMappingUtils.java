@@ -16,9 +16,8 @@ public class IndexMappingUtils {
             final File resource = new ClassPathResource(path).getFile();
             return new String(Files.readAllBytes(resource.toPath()));
         } catch (final Exception e) {
-//            log.error(e.getMessage(), e);
-            log.error("cannot be resolved to URL because it does not exist!");
-            return null;
+            log.error("failed to read file resource", e);
+            throw new IllegalStateException("failed to read file resource");
         }
     }
 }

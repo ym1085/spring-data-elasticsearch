@@ -32,12 +32,12 @@ public class IndexServiceImpl implements IndexService {
         final String settings = IndexMappingUtils.loadAsString("static/indices/es-settings.json");
 
         String deleteIndexName = "";
-        boolean isRecreateIndex = false;
+        boolean isRecreateIndexYn = false;
         if (paramMap != null) {
-            isRecreateIndex = (boolean) paramMap.get("isRecreateIndex");
+            isRecreateIndexYn = (boolean) paramMap.get("isRecreateIndexYn");
             deleteIndexName = (String) paramMap.get("deleteIndexName");
         }
-        log.warn("isRecreateIndex = {}, deleteIndexName = {}", isRecreateIndex, deleteIndexName);
+        log.warn("isRecreateIndexYn = {}, deleteIndexName = {}", isRecreateIndexYn, deleteIndexName);
 
         for (final String indexName : INDICES_TO_CREATE) {
             try {
@@ -46,7 +46,7 @@ public class IndexServiceImpl implements IndexService {
 
                 // code smell..
                 if (isExistsIndex) {
-                    if (isRecreateIndex) { // request delete and recreate index
+                    if (isRecreateIndexYn) { // request delete and recreate index
                         if (StringUtils.isNotBlank(deleteIndexName) && indexName.equalsIgnoreCase(deleteIndexName)) {
                             log.info("Delete = {}", deleteIndexName);
                             client.indices().delete(new DeleteIndexRequest(indexName), RequestOptions.DEFAULT);
@@ -58,16 +58,15 @@ public class IndexServiceImpl implements IndexService {
                 final CreateIndexRequest createIndexRequest = new CreateIndexRequest(indexName); // 인덱스 생성을 위한 객체 생성
                 createIndexRequest.settings(settings, XContentType.JSON);
 
-//                TODO: 2022-03-05 01:01분 => type=resource_already_exists_exception, 공백 들어오면 그냥 애초에 return 해버리면 될 것 같음?
                 final String mappings = getIndicesMappingInfo(indexName);
                 if (StringUtils.isNotBlank(mappings)) {
                     createIndexRequest.mapping(mappings, XContentType.JSON);
                     client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
                 } else {
-                    log.warn(">>>>>>>> mappings info is NULL!");
+                    log.warn("mappings info is NULL");
                 }
             } catch (final Exception e) {
-                log.error(e.getMessage(), e);
+                log.error("failed to recreate index", e);
             }
         }
     }
@@ -79,14 +78,8 @@ public class IndexServiceImpl implements IndexService {
      * @return null || mappings
      */
     private String getIndicesMappingInfo(String indexName) {
-        String mappings = "";
-        try {
-            mappings = IndexMappingUtils.loadAsString("static/indices/mappings/" + indexName + ".json");
-            if (StringUtils.isBlank(mappings)) {
-                return null;
-            }
-        } catch (final Exception e) {
-            log.error("Failed to load mappings for index with name = {}", indexName);
+        String mappings = IndexMappingUtils.loadAsString("static/indices/mappings/" + indexName + ".json");
+        if (StringUtils.isBlank(mappings)) {
             return null;
         }
         return mappings;
