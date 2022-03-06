@@ -13,8 +13,8 @@
 
 ## ✅ 2022-03-06
 
-> https://tmdrl5779.tistory.com/51  -> DTO
-> https://jyami.tistory.com/55 -> validation
+> https://tmdrl5779.tistory.com/51  -> DTO  
+> https://jyami.tistory.com/55 -> validation  
 > https://interconnection.tistory.com/137 -> JSON 직렬화, 역직렬화 관련하여 참고.
 
 ### 회원쪽 기존 소스 리팩토링
