@@ -21,7 +21,6 @@ import java.util.List;
  *
  * @author ymkim
  * @since 2022.03.05 Sun 13:15
- *
  */
 @RestController
 @RequestMapping("/api/v1")
