@@ -53,6 +53,6 @@ Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위�
 
 ## 4. 참고 자료(Reference)
 
-- [Elastic 가이드북](https://app.gather.town/invite?token=R9SyULHNgX2gvZXaYhz9H6iNkqepPAzq)
+- [Elastic guide book](https://esbook.kimjmin.net/)
 - [Spring Data Elasticsearch - Reference Document](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#preface.versions)
 - [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
