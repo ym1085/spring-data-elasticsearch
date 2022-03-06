@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "54bed646-ea50-4070-9054-087219ab39ae",
+		"name": "[로컬] Spring Data Elasitcsearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[검색] Spring Data Elasticsearch",
+			"item": [
+				{
+					"name": "/user",
+					"item": [
+						{
+							"name": "[검색] 회원 조회",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8200/api/v1/user",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[등록] 유저 데이터 등록",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"updatedAt\": \"2022-03-05\",\r\n    \"createdAt\": \"2022-03-05\",\r\n    \"userAddress\": \"경기도 성남시 분당구 판교로 783빌라 두루미안\",\r\n    \"userId\": \"yunjoo04\",\r\n    \"userName\": \"김연주\",\r\n    \"userPhoneNum\": \"010-4445-3434\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8200/api/v1/user",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/vehicle",
+					"item": [
+						{
+							"name": "[검색] 단일 차량 조회",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8200/api/v1/vehicle/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"vehicle",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[검색] 날짜 기반 검색",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8200/api/v1/vehicle/search/2000-11-23",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"vehicle",
+										"search",
+										"2000-11-23"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[검색] 차량 데이터 등록",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\" : \"1\",\r\n    \"vehicle_number\" : \"AAB-123\",\r\n    \"vehicle_name\" : \"Audi A3\",\r\n    \"created_at\" : \"2011-12-31\",\r\n    \"updated_at\" : \"2011-12-31\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8200/api/v1/vehicle",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"vehicle"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[검색] Match, MultiMatch 쿼리 기반 검색",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fields\" : [\"vehicle_name\"],\r\n    \"searchTerm\": \"audi\",\r\n    \"sortBy\" : \"created_at\",\r\n    \"order\" : \"DESC\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8200/api/v1/vehicle/search",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"vehicle",
+										"search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[검색] bool 쿼리 기반 검색",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"fields\" : [\"vehicle_name\"],\r\n    \"searchTerm\": \"audi\",\r\n    \"sortBy\" : \"created_at\",\r\n    \"order\" : \"DESC\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8200/api/v1/vehicle/search/2000-11-23",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"vehicle",
+										"search",
+										"2000-11-23"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/index",
+					"item": [
+						{
+							"name": "[삭제] 인덱스 삭제",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"deleteIndexName\" : \"vehicle\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8200/api/v1/index",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"index"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/dummy",
+					"item": [
+						{
+							"name": "[등록] 더미 데이터 등록",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8200/api/v1/dummy/user",
+									"host": [
+										"localhost"
+									],
+									"port": "8200",
+									"path": [
+										"api",
+										"v1",
+										"dummy",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
