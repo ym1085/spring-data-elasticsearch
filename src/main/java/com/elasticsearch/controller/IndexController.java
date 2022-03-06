@@ -16,7 +16,7 @@ import java.util.Map;
  * Elasticsearch의 Index를 생성, 수정, 삭제하기위한 컨트롤러입니다.
  *
  * @author ymkim
- * @since 2022.03.05 Sun 17:38
+ * @since 2022.03.05 Sat 17:38
  */
 @RestController
 @RequestMapping("/api/v1")

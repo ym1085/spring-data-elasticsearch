@@ -20,7 +20,7 @@ import java.util.List;
  * 차량 정보 관련 검색 컨트롤러 입니다.
  *
  * @author ymkim
- * @since 2022.03.05 Sun 13:15
+ * @since 2022.03.05 Sat 13:15
  */
 @RestController
 @RequestMapping("/api/v1")

@@ -14,7 +14,7 @@ import java.util.Date;
  * 회원 정보 조회 시 사용되는 DTO, @NotNull로 좀 유연하게 처리
  *
  * @author ymkim
- * @since 2022.03.05 Sun 17:15
+ * @since 2022.03.05 Sat 17:15
  */
 @Getter
 @ToString

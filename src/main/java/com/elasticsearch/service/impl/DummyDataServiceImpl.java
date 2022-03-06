@@ -25,7 +25,7 @@ import java.util.List;
  * 더미 데이터 색인(Indexing)
  *
  * @author ymkim
- * @since 2022.03.05 Sun 23:26
+ * @since 2022.03.05 Sat 23:26
  * @desc 테스트 용도로 사용하는 경우에는 해당 API 호출하여 데이터 등록 -> DummyDataController
  */
 @Service

@@ -15,7 +15,7 @@ import java.util.Date;
  * 차량 정보 조회 시 사용되는 DTO
  *
  * @author ymkim
- * @since 2022.03.05 Sun 19:03
+ * @since 2022.03.05 Sat 19:03
  */
 @Getter
 @ToString
