@@ -45,7 +45,7 @@ Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위�
 |-----------------|---|-------------------|
 | **인덱스 삭제 후 재생성** |GET| /api/v1/index     |
 
-### 3-4 S[ample data(샘플 데이터 관련)](https://github.com/ym1085/Spring-Data-Elasticsearch/blob/3c6c3f366f34afd5e29f1300052bf249a61e1d2d/src/main/java/com/elasticsearch/controller/DummyDataController.java#L16)
+### 3-4 [Sample data(샘플 데이터 관련)](https://github.com/ym1085/Spring-Data-Elasticsearch/blob/3c6c3f366f34afd5e29f1300052bf249a61e1d2d/src/main/java/com/elasticsearch/controller/DummyDataController.java#L16)
 
 | CRUD            |HTTP| URI               |
 |-----------------|---|-------------------|
