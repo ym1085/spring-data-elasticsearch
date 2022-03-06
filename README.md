@@ -19,16 +19,17 @@ Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위�
 
 ## 3. 규격서(API Document)
 
-[개발 API Test](./doc/postman/spring_data_elasitcsearch.postman_collection.json)
+1. Recommend the [postman](https://www.postman.com/) api test tool.  
+2. Import [sample test data](./doc/postman/spring_data_elasitcsearch.postman_collection.json) to your postman.
 
-### 3-1 User(회원)
+### 3-1 [User(회원)](https://github.com/ym1085/Spring-Data-Elasticsearch/blob/3c6c3f366f34afd5e29f1300052bf249a61e1d2d/src/main/java/com/elasticsearch/controller/UserController.java#L16)
 
 | CRUD             |HTTP| URI                            |
 |------------------|---|--------------------------------|
 | **단일 회원 검색**     |GET| /api/v1/user                   | 
 | **유저 등록**        |POST| /api/v1/user                   |
 
-### 3-2 Vehicle(차량)
+### 3-2 [Vehicle(차량)](https://github.com/ym1085/Spring-Data-Elasticsearch/blob/3c6c3f366f34afd5e29f1300052bf249a61e1d2d/src/main/java/com/elasticsearch/controller/VehicleController.java#L28)
 
 | CRUD                            |HTTP| URI                          |
 |---------------------------------|---|------------------------------|
@@ -38,11 +39,16 @@ Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위�
 | **match, multi match 쿼리 기반 검색** |POST| /api/v1/vehicle/search |
 | **bool 쿼리 기반 검색**               |POST| /api/v1/vehicle/search/{date} |
 
-### 3-3 Common(공통)
+### 3-3 [Index(인덱싱 관련)](https://github.com/ym1085/Spring-Data-Elasticsearch/blob/3c6c3f366f34afd5e29f1300052bf249a61e1d2d/src/main/java/com/elasticsearch/controller/IndexController.java#L24)
 
 | CRUD            |HTTP| URI               |
 |-----------------|---|-------------------|
-| **인덱스 삭제 후 재생성** |GET| /api/v1/index     | 
+| **인덱스 삭제 후 재생성** |GET| /api/v1/index     |
+
+### 3-4 S[ample data(샘플 데이터 관련)](https://github.com/ym1085/Spring-Data-Elasticsearch/blob/3c6c3f366f34afd5e29f1300052bf249a61e1d2d/src/main/java/com/elasticsearch/controller/DummyDataController.java#L16)
+
+| CRUD            |HTTP| URI               |
+|-----------------|---|-------------------|
 | **테스트 데이터 등록**  |POST| /api/v1/dummy/{indexName} |
 
 ## 4. 참고 자료(Reference)
