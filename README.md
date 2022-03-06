@@ -3,7 +3,7 @@
 ## 1. 요약(Summary)
 
 Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위한 목적으로 만들어진 프로젝트입니다.  
-데이터 전처리, 후처리는 `Logstash`, 모니터링은 `키바나`, 검색은 `Elasticsearch`를 사용합니다.  
+데이터 수집은 `Logstash`, 모니터링은 `키바나`, 검색은 `Elasticsearch`를 사용합니다.  
 
 ## 2. 기술 스펙(Tech spec)
 
