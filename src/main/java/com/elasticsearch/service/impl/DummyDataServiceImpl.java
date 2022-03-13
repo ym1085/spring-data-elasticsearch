@@ -38,6 +38,11 @@ public class DummyDataServiceImpl implements DummyDataService {
     private final UserServiceImpl userServiceImpl;
     private final VehicleServiceImpl vehicleService;
 
+    /**
+     * script/*.json 파일을 읽어들여 데이터를 Elasticsearch에 인덱싱 하는 메소드 입니다.
+     *
+     * @param indexName : [String] 데이터 등록을 원하는 인덱스명
+     */
     @Override
     public Boolean insertDummyData(String indexName) {
         if (StringUtils.isBlank(indexName)) {
@@ -53,13 +58,11 @@ public class DummyDataServiceImpl implements DummyDataService {
             log.info("===================================================================");
             File file = new File(jsonPath);
 
-            int idx = 1;
             if (indexName.equalsIgnoreCase(IndicesHelper.USER_INDEX_NAME)) {
                 List<UserRequestDto> userList = mapper.readValue(file, new TypeReference<>() {});
                 log.info("userList = {}", userList.toString());
 
                 for (UserRequestDto user : userList) {
-                    log.debug("idx = {}", idx++);
                     userServiceImpl.saveDocumentToIndex(user);
                 }
             } else if (indexName.equalsIgnoreCase(IndicesHelper.VEHICLE_INDEX_NAME)) {
@@ -67,7 +70,6 @@ public class DummyDataServiceImpl implements DummyDataService {
                 log.info("vehicleList = {}", vehicleList.toString());
 
                 for (VehicleRequestDto vehicle : vehicleList) {
-                    log.debug("idx = {}", idx++);
                     vehicleService.saveDocumentToIndex(vehicle);
                 }
             }

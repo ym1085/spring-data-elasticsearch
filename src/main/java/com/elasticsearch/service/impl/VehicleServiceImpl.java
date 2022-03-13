@@ -36,6 +36,11 @@ public class VehicleServiceImpl implements VehicleService {
     private static final ObjectMapper mapper = new ObjectMapper();
     private final RestHighLevelClient client;
 
+    /**
+     * Vehicle Document 생성
+     *
+     * @param vehicleRequestDto : [VehicleRequestDto]
+     */
     @Override
     public Boolean saveDocumentToIndex(final VehicleRequestDto vehicleRequestDto) {
         Vehicle vehicleEntity = vehicleRequestDto.toEntity();
@@ -75,34 +80,24 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<Vehicle> searchContentsByMatchQuery(final SearchRequestDto searchRequestDto) {
-        final SearchRequest request = SearchUtil.buildSearchRequest(
-            IndicesHelper.VEHICLE_INDEX_NAME,
-            searchRequestDto
-        );
-
+        final SearchRequest request
+                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_INDEX_NAME, searchRequestDto);
         log.info("request = {}", request.toString());
         return searchInternal(request);
     }
 
     @Override
     public List<Vehicle> searchContentsByRangeQuery(final Date date) {
-        final SearchRequest request = SearchUtil.buildSearchRequest(
-            IndicesHelper.VEHICLE_INDEX_NAME,
-            "created_at",
-            date
-        );
-
+        final SearchRequest request
+                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_INDEX_NAME, "created_at", date);
         log.info("request = {}", request.toString());
         return searchInternal(request);
     }
 
     @Override
     public List<Vehicle> searchContentsByBoolQuery(final SearchRequestDto searchRequestDto, final Date date) {
-        final SearchRequest request = SearchUtil.buildSearchRequest(
-            IndicesHelper.VEHICLE_INDEX_NAME,
-            searchRequestDto,
-            date
-        );
+        final SearchRequest request
+                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_INDEX_NAME, searchRequestDto, date);
         return searchInternal(request);
     }
 

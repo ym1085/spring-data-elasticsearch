@@ -98,6 +98,116 @@
       "vehiclePrice" : "$228,990",
       "updatedAt": "2015-03-09",
       "createdAt" : "2015-03-09"
+    },
+    {
+      "id" : "11",
+      "vehicleNumber" : "18A-024",
+      "vehicleName" : "Skoda Apple",
+      "vehicleColor" : "red",
+      "vehicleRemainAmount" : "113",
+      "vehiclePrice" : "$445,990",
+      "updatedAt": "2014-05-09",
+      "createdAt" : "2014-05-09"
+    },
+    {
+      "id" : "12",
+      "vehicleNumber" : "44B-343",
+      "vehicleName" : "Steven Bour",
+      "vehicleColor" : "yellow",
+      "vehicleRemainAmount" : "33",
+      "vehiclePrice" : "$8,990",
+      "updatedAt": "2020-04-09",
+      "createdAt" : "2020-04-09"
+    },
+    {
+      "id" : "13",
+      "vehicleNumber" : "13A-123",
+      "vehicleName" : "Bour Bear",
+      "vehicleColor" : "rainbow",
+      "vehicleRemainAmount" : "333",
+      "vehiclePrice" : "$565,990",
+      "updatedAt": "2021-04-23",
+      "createdAt" : "2021-04-23"
+    },
+    {
+      "id" : "14",
+      "vehicleNumber" : "99F-442",
+      "vehicleName" : "Electric bear",
+      "vehicleColor" : "lightblue",
+      "vehicleRemainAmount" : "2",
+      "vehiclePrice" : "$1228,990",
+      "updatedAt": "1993-08-09",
+      "createdAt" : "1993-08-09"
+    },
+    {
+      "id" : "15",
+      "vehicleNumber" : "63G-223",
+      "vehicleName" : "Thunderbolt Spring",
+      "vehicleColor" : "green",
+      "vehicleRemainAmount" : "7",
+      "vehiclePrice" : "$554,990",
+      "updatedAt": "1991-10-24",
+      "createdAt" : "1991-10-24"
+    },
+    {
+      "id" : "16",
+      "vehicleNumber" : "77T-132",
+      "vehicleName" : "Lightbolt Apache",
+      "vehicleColor" : "yellow",
+      "vehicleRemainAmount" : "123",
+      "vehiclePrice" : "$300,990",
+      "updatedAt": "2005-10-24",
+      "createdAt" : "2005-10-24"
+    },
+    {
+      "id" : "17",
+      "vehicleNumber" : "22W-132",
+      "vehicleName" : "Lightbolt Apache",
+      "vehicleColor" : "yellow",
+      "vehicleRemainAmount" : "123",
+      "vehiclePrice" : "$400,990",
+      "updatedAt": "2008-10-24",
+      "createdAt" : "2008-10-24"
+    },
+    {
+      "id" : "17",
+      "vehicleNumber" : "990W-132",
+      "vehicleName" : "Electric Apache",
+      "vehicleColor" : "lightblue",
+      "vehicleRemainAmount" : "3",
+      "vehiclePrice" : "$400,990",
+      "updatedAt": "2022-01-02",
+      "createdAt" : "2022-01-02"
+    },
+    {
+      "id" : "18",
+      "vehicleNumber" : "872W-978",
+      "vehicleName" : "Electric Rocket",
+      "vehicleColor" : "gray",
+      "vehicleRemainAmount" : "554",
+      "vehiclePrice" : "$120,990",
+      "updatedAt": "2022-02-02",
+      "createdAt" : "2022-02-02"
+    },
+    {
+      "id" : "19",
+      "vehicleNumber" : "442W-123",
+      "vehicleName" : "Rocket Job",
+      "vehicleColor" : "rainbow",
+      "vehicleRemainAmount" : "333",
+      "vehiclePrice" : "$1334,990",
+      "updatedAt": "2022-03-02",
+      "createdAt" : "2022-03-02"
+    },
+    {
+      "id" : "20",
+      "vehicleNumber" : "998W-778",
+      "vehicleName" : " Apache Passat",
+      "vehicleColor" : "yellow",
+      "vehicleRemainAmount" : "123",
+      "vehiclePrice" : "$34,990",
+      "updatedAt": "2022-03-13",
+      "createdAt" : "2022-03-13"
     }
 ]
 
