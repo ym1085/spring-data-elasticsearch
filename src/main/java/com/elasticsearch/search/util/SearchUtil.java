@@ -10,6 +10,8 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
@@ -18,11 +20,22 @@ import java.util.List;
 
 @NoArgsConstructor
 public class SearchUtil {
+    private static final Logger log = LoggerFactory.getLogger(SearchUtil.class);
 
     public static SearchRequest buildSearchRequest(final String indexName, final SearchRequestDto searchRequestDto) {
         SearchRequest request = null;
         try {
-            final SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(searchRequestDto));
+            final int page = searchRequestDto.getPage();
+            final int size = searchRequestDto.getSize();
+            final int from = page <= 0 ? 0 : page * size;
+
+            log.debug("page = {}, size = {}", page, size);
+            log.debug("from = {}", from);
+
+            final SearchSourceBuilder builder = new SearchSourceBuilder()
+                    .from(from)
+                    .size(size)
+                    .postFilter(getQueryBuilder(searchRequestDto));
 
             if (searchRequestDto.getSortBy() != null) {
                 builder.sort(
