@@ -22,7 +22,27 @@ import java.util.List;
 public class SearchUtil {
     private static final Logger log = LoggerFactory.getLogger(SearchUtil.class);
 
-    public static SearchRequest buildSearchRequest(final String indexName, final SearchRequestDto searchRequestDto) {
+    /**
+     * MatchAll Query
+     *
+     * @param indexName
+     * @return
+     */
+    public static SearchRequest buildSearchRequestByMatchAllQuery(final String indexName) {
+        final SearchSourceBuilder builder = new SearchSourceBuilder()
+                .size(50) // 50개씩 출력
+                .query(getQueryBuilder());
+        return new SearchRequest(indexName).source(builder);
+    }
+
+    /**
+     * Match || Multi Match Query 기반, SearchRequest 객체 생성 후 반환
+     *
+     * @param indexName
+     * @param searchRequestDto
+     * @return
+     */
+    public static SearchRequest buildSearchRequestByMatchQuery(final String indexName, final SearchRequestDto searchRequestDto) {
         SearchRequest request = null;
         try {
             final int page = searchRequestDto.getPage();
@@ -52,10 +72,17 @@ public class SearchUtil {
         return request;
     }
 
-    public static SearchRequest buildSearchRequest(final String indexName, final String field, final Date date) {
+    /**
+     * Range Query 기반, SearchRequest 객체 생성 후 반환
+     *
+     * @param indexName : [String] 검색 대상이 되는 인덱스명
+     * @param field     : [String] 검색을 원하는 필드명
+     * @param date      : [Date] 검색 조건 날짜(gte)
+     * @return          : [SearchRequest]
+     */
+    public static SearchRequest buildSearchRequestByRangeQuery(final String indexName, final String field, final Date date) {
         try {
             final SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(field, date));
-
             SearchRequest request = new SearchRequest(indexName);
             request.source(builder);
             return request;
@@ -65,7 +92,15 @@ public class SearchUtil {
         }
     }
 
-    public static SearchRequest buildSearchRequest(final String indexName, final SearchRequestDto searchRequestDto, final Date date) {
+    /**
+     * Bool Query 기반, SearchRequest 객체 생성 후 반환
+     *
+     * @param indexName         : [String] 검색 대상이 되는 인덱스명
+     * @param searchRequestDto  : ""
+     * @param date              : [Date] 검색 조건 날짜(gte)
+     * @return                  : [SearchRequest]
+     */
+    public static SearchRequest buildSearchRequestByBoolQuery(final String indexName, final SearchRequestDto searchRequestDto, final Date date) {
         SearchRequest request = null;
         try {
             final QueryBuilder searchQueryBuilder = getQueryBuilder(searchRequestDto);
@@ -94,6 +129,10 @@ public class SearchUtil {
         return request;
     }
 
+    private static QueryBuilder getQueryBuilder() {
+        return QueryBuilders.matchAllQuery();
+    }
+
     private static QueryBuilder getQueryBuilder(final SearchRequestDto searchRequestDto) {
         if (ObjectUtils.isEmpty(searchRequestDto)) {
             return null;
@@ -104,11 +143,13 @@ public class SearchUtil {
             return null;
         }
 
-        if (fields.size() > 1) {
-            MultiMatchQueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(searchRequestDto.getSearchTerm()) // search multi field
-                    .type(MultiMatchQueryBuilder.Type.CROSS_FIELDS)
-                    .operator(Operator.AND);
+        if (fields.size() > 1) { // search multi field
+            MultiMatchQueryBuilder queryBuilder
+                    = QueryBuilders.multiMatchQuery(searchRequestDto.getSearchTerm())
+                        .type(MultiMatchQueryBuilder.Type.CROSS_FIELDS)
+                        .operator(Operator.AND);
 
+            // 메소드 참조랑 동일
             /*fields.forEach((n) -> {
                 queryBuilder.field(n)
             });*/

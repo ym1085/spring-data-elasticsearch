@@ -41,6 +41,12 @@
 
 ## ✅ 2022-03-13
 
-- API 요청에 맞는 페이징 처리 수행
+- [x] API 요청에 맞는 페이징 처리 수행
 - Match, Multimatch query 데이터 안 나오는 부분 수정 15:54
-  - 수정 완료 16:05
+  - [x] 수정 완료 16:05
+- 차량 전체 검색 API 추가
+  - [x] 차량
+- Elasticsearch, Kibana Local에 재 설치
+  - [ ] Elasticsearch 7.6.1
+  - [ ] Kibana 7.6.1
+  - [ ] conf 파일 수정

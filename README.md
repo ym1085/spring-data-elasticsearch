@@ -2,7 +2,7 @@
 
 ## 1. 요약(Summary)
 
-Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위한 목적으로 만들어진 프로젝트입니다.  
+Spring Data Elasticsearch를 이용하여 간단한 검색 서비스를 구현하기 위한 목적으로 만들어진 프로젝트입니다.  
 데이터 수집은 `Logstash`, 모니터링은 `키바나`, 검색은 `Elasticsearch`를 사용합니다.  
 
 ## 2. 기술 스펙(Tech spec)
@@ -31,19 +31,20 @@ Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위�
 
 ### 3-2 Vehicle(차량)
 
-| CRUD                            |HTTP| URI                          |
-|---------------------------------|---|------------------------------|
-| **단일 차량 검색**                    |GET| /api/v1/vehicle/{id}         |
-| **날짜 기반 검색**                    |POST| /api/v1/vehicle/search/{date} |
-| **차량 등록**                       |POST| /api/v1/vehicle |
+| CRUD                           |HTTP| URI                     |
+|--------------------------------|---|-------------------------|
+| **전체 차량 검색**                   |GET| /api/v1/vehicle         |
+| **단일 차량 검색**                   |GET| /api/v1/vehicle/{id}    |
+| **날짜 기반 검색**                   |POST| /api/v1/vehicle/search/{date} |
+| **차량 등록**                      |POST| /api/v1/vehicle |
 | **match, multi match 쿼리 기반 검색** |POST| /api/v1/vehicle/search |
-| **bool 쿼리 기반 검색**               |POST| /api/v1/vehicle/search/{date} |
+| **bool 쿼리 기반 검색**              |POST| /api/v1/vehicle/search/{date} |
 
 ### 3-3 Index(인덱싱 관련)
 
-| CRUD            |HTTP| URI               |
-|-----------------|---|-------------------|
-| **인덱스 삭제 후 재생성** |GET| /api/v1/index     |
+| CRUD              |HTTP| URI               |
+|-------------------|---|-------------------|
+| **인덱스 삭제 후 재 생성** |GET| /api/v1/index     |
 
 ### 3-4 Sample data(샘플 데이터 관련)
 
@@ -54,5 +55,6 @@ Spring Data Elasticsearch를 이용하여 검색 서비스를 제공하기 위�
 ## 4. 참고 자료(Reference)
 
 - [Elastic guide book](https://esbook.kimjmin.net/)
-- [Spring Data Elasticsearch - Reference Document](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#preface.versions)
+- [Spring Data Elasticsearch - Reference Document](https://docs.spring.io/spring-data/elasticsearch/docs/current/reference/html/#preface)
+- [Java High Level REST Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/7.12/java-rest-high.html)
 - [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
