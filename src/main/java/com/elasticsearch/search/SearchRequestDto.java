@@ -10,9 +10,9 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class SearchRequestDto {
-    private List<String> fields; // standard to search
-    private String searchTerm; // search keyword
-    private String sortBy; // standard to sort
-    private SortOrder order; // asc, desc
+public class SearchRequestDto extends PagedRequestDTO {
+    private List<String> fields;
+    private String searchTerm;
+    private String sortBy;
+    private SortOrder order;
 }
