@@ -39,7 +39,7 @@ public class VehicleServiceImpl implements VehicleService {
     /**
      * Vehicle Document 생성
      *
-     * @param vehicleRequestDto : [VehicleRequestDto]
+     * @param vehicleRequestDto
      */
     @Override
     public Boolean saveDocumentToIndex(final VehicleRequestDto vehicleRequestDto) {
@@ -62,7 +62,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public Vehicle findById(final String vehicleId) {
+    public Vehicle findVehicleById(final String vehicleId) {
         log.debug("vehicleId = {}", vehicleId);
         try {
             final GetResponse response = client.get(new GetRequest(IndicesHelper.VEHICLE_INDEX_NAME, vehicleId), RequestOptions.DEFAULT);
@@ -79,28 +79,35 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public List<Vehicle> searchContentsByMatchQuery(final SearchRequestDto searchRequestDto) {
+    public List<Vehicle> searchVehicleByMatchAll() {
+        final SearchRequest request = SearchUtil.buildSearchRequestByMatchAllQuery(IndicesHelper.VEHICLE_INDEX_NAME);
+        return  searchInternal(request);
+    }
+
+    @Override
+    public List<Vehicle> searchVehiclesByMatchQuery(final SearchRequestDto searchRequestDto) {
         final SearchRequest request
-                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_INDEX_NAME, searchRequestDto);
+                = SearchUtil.buildSearchRequestByMatchQuery(IndicesHelper.VEHICLE_INDEX_NAME, searchRequestDto);
         log.info("request = {}", request.toString());
         return searchInternal(request);
     }
 
     @Override
-    public List<Vehicle> searchContentsByRangeQuery(final Date date) {
+    public List<Vehicle> searchVehiclesByRangeQuery(final Date date) {
         final SearchRequest request
-                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_INDEX_NAME, "created_at", date);
+                = SearchUtil.buildSearchRequestByRangeQuery(IndicesHelper.VEHICLE_INDEX_NAME, "created_at", date);
         log.info("request = {}", request.toString());
         return searchInternal(request);
     }
 
     @Override
-    public List<Vehicle> searchContentsByBoolQuery(final SearchRequestDto searchRequestDto, final Date date) {
+    public List<Vehicle> searchVehiclesByBoolQuery(final SearchRequestDto searchRequestDto, final Date date) {
         final SearchRequest request
-                = SearchUtil.buildSearchRequest(IndicesHelper.VEHICLE_INDEX_NAME, searchRequestDto, date);
+                = SearchUtil.buildSearchRequestByBoolQuery(IndicesHelper.VEHICLE_INDEX_NAME, searchRequestDto, date);
         return searchInternal(request);
     }
 
+//    TODO: searchInternal 메소드명 수정 하세용
     private List<Vehicle> searchInternal(final SearchRequest request) {
         if (request == null) {
             log.error("Failed to build search request query");

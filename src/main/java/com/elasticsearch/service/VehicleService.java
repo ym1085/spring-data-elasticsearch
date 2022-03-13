@@ -11,11 +11,13 @@ public interface VehicleService {
 
     Boolean saveDocumentToIndex(VehicleRequestDto vehicle);
 
-    Vehicle findById(String id);
+    Vehicle findVehicleById(String id);
 
-    List<Vehicle> searchContentsByMatchQuery(SearchRequestDto searchRequestDto);
+    List<Vehicle> searchVehicleByMatchAll();
 
-    List<Vehicle> searchContentsByRangeQuery(Date date);
+    List<Vehicle> searchVehiclesByMatchQuery(SearchRequestDto searchRequestDto);
 
-    List<Vehicle> searchContentsByBoolQuery(SearchRequestDto searchRequestDto, Date date);
+    List<Vehicle> searchVehiclesByRangeQuery(Date date);
+
+    List<Vehicle> searchVehiclesByBoolQuery(SearchRequestDto searchRequestDto, Date date);
 }
