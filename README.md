@@ -1,4 +1,4 @@
-# ♻ Spring-Data-Elasticsearch
+# Spring-Data-Elasticsearch
 
 ## 1. 요약(Summary)
 
