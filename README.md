@@ -8,7 +8,7 @@ Spring Data Elasticsearch를 활용하여 검색 서비스를 구현하기 위�
 
 | Tech                         | Version |
 |------------------------------|--------|
-| **Java**                     | 8      |
+| **Java**                     | 11      |
 | **Spring Boot**              | 2.5.9  |
 | **Spring Data Elasticsearch** | 4.2.8  |
 | **Elastic Client**           | 7.12.1 |
