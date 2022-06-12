@@ -11,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -39,7 +38,6 @@ public class Vehicle {
     @JsonProperty("vehicle_name")
     private String vehicleName;
 
-    /* convert to [ 'red', 'yellow', 'black' ] */
     @JsonProperty("vehicle_color")
     private String vehicleColor;
 
@@ -58,14 +56,8 @@ public class Vehicle {
     private Date updatedAt;
 
     @Builder
-    public Vehicle(String id,
-                   String vehicleNumber,
-                   String vehicleName,
-                   String vehicleColor,
-                   String vehicleRemainAmount,
-                   String vehiclePrice,
-                   Date createdAt,
-                   Date updatedAt) {
+    public Vehicle(String id, String vehicleNumber, String vehicleName, String vehicleColor,
+                   String vehicleRemainAmount, String vehiclePrice, Date createdAt, Date updatedAt) {
         this.id = id;
         this.vehicleNumber = vehicleNumber;
         this.vehicleName = vehicleName;

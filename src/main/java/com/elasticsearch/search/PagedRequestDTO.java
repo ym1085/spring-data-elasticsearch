@@ -1,8 +1,7 @@
 package com.elasticsearch.search;
 
 public class PagedRequestDTO {
-    private static final int DEFAULT_PAGE_SIZE = 100;
-
+    private final int DEFAULT_PAGE_SIZE = 100;
     private int page;
     private int size;
 

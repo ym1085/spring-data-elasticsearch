@@ -2,7 +2,7 @@
 
 개인적인 이슈를 기록하기 위한 Document입니다.
 
-## ✅ 2022-03-05
+## 2022-03-05
 
 1. Index 재생성하는 컨트롤러 API 호출 시 Index명 받는걸로 수정.
 2. IndexServiceImple의 @PostConstruct 어노테이션 제거.
@@ -11,7 +11,7 @@
 5. type=resource_already_exists_exception. 24:31
 6. 유저 인덱스명 입력 안할 경우에는 Controller 딴에서 return 바로 반환.  24:41
 
-## ✅ 2022-03-06
+## 2022-03-06
 
 > https://tmdrl5779.tistory.com/51  -> DTO  
 > https://jyami.tistory.com/55 -> validation  
@@ -39,7 +39,7 @@
   - user
   - vehicle
 
-## ✅ 2022-03-13
+## 2022-03-13
 
 - [x] API 요청에 맞는 페이징 처리 수행
 - Match, Multimatch query 데이터 안 나오는 부분 수정 15:54
@@ -47,6 +47,11 @@
 - 차량 전체 검색 API 추가
   - [x] 차량
 - Elasticsearch, Kibana Local에 재 설치
-  - [ ] Elasticsearch 7.6.1
-  - [ ] Kibana 7.6.1
-  - [ ] conf 파일 수정
+  - [x] Elasticsearch 7.6.1
+  - [x] Kibana 7.6.1
+  - [x] conf 파일 수정
+
+## 2022-06-12
+
+- [ ] 기존 로거 수정
+

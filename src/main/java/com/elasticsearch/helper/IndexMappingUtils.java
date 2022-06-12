@@ -1,22 +1,17 @@
 package com.elasticsearch.helper;
 
-import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.File;
 import java.nio.file.Files;
 
 public class IndexMappingUtils {
-    private static final Logger log = LoggerFactory.getLogger(IndexMappingUtils.class);
 
-    public static String loadAsString(final String path) {
+    public static String loadAsString(String path) {
         try {
-            final File resource = new ClassPathResource(path).getFile();
+            File resource = new ClassPathResource(path).getFile();
             return new String(Files.readAllBytes(resource.toPath()));
-        } catch (final Exception e) {
-            log.error("failed to read file resource", e);
+        } catch (Exception e) {
             throw new IllegalStateException("failed to read file resource");
         }
     }
