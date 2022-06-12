@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds">
-    <property name="LOG_PATH" value="./logs"/>
+    <property name="LOG_PATH" value="./logback/logs/"/>
     <property name="LOG_FILE_NAME" value="local_logback"/>
     <property name="ERR_LOG_FILE_NAME" value="local_error_logback"/>
     <property name="CONSOLE_LOG_PATTERN"
@@ -14,7 +14,7 @@
         </encoder>
     </appender>
 
-    <!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
@@ -26,9 +26,9 @@
             </timeBasedFileNamingAndTriggeringPolicy>
             <maxHistory>15</maxHistory>
         </rollingPolicy>
-    </appender>-->
+    </appender>
 
-    <!--<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>error</level>
             <onMatch>ACCEPT</onMatch>
@@ -47,14 +47,14 @@
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
 
-            &lt;!&ndash; 일자별 로그파일 최대 보관주기, 해당 설정일 넘어가면 자동으로 삭제 &ndash;&gt;
+            <!-- 일자별 로그파일 최대 보관주기, 해당 설정일 넘어가면 자동으로 삭제 -->
             <maxHistory>15</maxHistory>
         </rollingPolicy>
-    </appender>-->
+    </appender>
 
     <root level="${LOG_LEVEL}">
         <appender-ref ref="CONSOLE"/>
-        <!--<appender-ref ref="FILE"/>
-        <appender-ref ref="ERROR"/>-->
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ERROR"/>
     </root>
 </configuration>

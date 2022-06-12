@@ -2,24 +2,22 @@
 
 ## 1. 요약(Summary)
 
-Spring Data Elasticsearch를 이용하여 간단한 검색 서비스를 구현하기 위한 목적으로 만들어진 프로젝트입니다.
+Spring Data Elasticsearch를 활용하여 검색 서비스를 구현하기 위한 목적으로 만들어진 프로젝트입니다.
 
 ## 2. 기술 스펙(Tech spec)
 
 | Tech                         | Version |
-|------------------------------|---------|
-| **Java**                     | 11      |
-| **Spring Boot**              | 2.5.9   |
-| **Spring Data Elasticsearch** | 4.2.8   |
-| **Elastic Client**           | 7.12.1  |
-| **Elasticsearch**            | 7.6.1   |
-| **Kibana**                   | 7.6.1   |
-| **Logstash**                 | 7.6.1   |
+|------------------------------|--------|
+| **Java**                     | 8      |
+| **Spring Boot**              | 2.5.9  |
+| **Spring Data Elasticsearch** | 4.2.8  |
+| **Elastic Client**           | 7.12.1 |
+| **Elasticsearch**            | 7.6.1  |
+| **Kibana**                   | 7.6.1  |
 
 ## 3. 규격서(API Document)
 
-1. Recommend the [postman](https://www.postman.com/) api test tool.  
-2. Import [sample test data](./doc/postman/spring_data_elasitcsearch.postman_collection.json) to your postman.
+1. Recommend the [postman](https://www.postman.com/) api test tool.
 
 ### 3-1 User(회원)
 

@@ -43,13 +43,7 @@ public class User {
     private Date updatedAt;
 
     @Builder
-    public User(String id,
-                String userName,
-                String userId,
-                String userPhoneNum,
-                String userAddress,
-                Date createdAt,
-                Date updatedAt) {
+    public User(String id, String userName, String userId, String userPhoneNum, String userAddress, Date createdAt, Date updatedAt) {
         this.id = id;
         this.userName = userName;
         this.userId = userId;

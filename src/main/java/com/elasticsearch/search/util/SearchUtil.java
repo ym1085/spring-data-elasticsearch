@@ -2,16 +2,11 @@ package com.elasticsearch.search.util;
 
 import com.elasticsearch.search.SearchRequestDto;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
-import org.elasticsearch.index.query.Operator;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
@@ -19,8 +14,8 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
+@Slf4j
 public class SearchUtil {
-    private static final Logger log = LoggerFactory.getLogger(SearchUtil.class);
 
     /**
      * MatchAll Query
@@ -28,9 +23,9 @@ public class SearchUtil {
      * @param indexName
      * @return
      */
-    public static SearchRequest buildSearchRequestByMatchAllQuery(final String indexName) {
-        final SearchSourceBuilder builder = new SearchSourceBuilder()
-                .size(50) // 50개씩 출력
+    public static SearchRequest buildSearchRequestByMatchAllQuery(String indexName) {
+        SearchSourceBuilder builder = new SearchSourceBuilder()
+                .size(50)
                 .query(getQueryBuilder());
         return new SearchRequest(indexName).source(builder);
     }
@@ -42,17 +37,14 @@ public class SearchUtil {
      * @param searchRequestDto
      * @return
      */
-    public static SearchRequest buildSearchRequestByMatchQuery(final String indexName, final SearchRequestDto searchRequestDto) {
+    public static SearchRequest buildSearchRequestByMatchQuery(String indexName, SearchRequestDto searchRequestDto) {
         SearchRequest request = null;
         try {
-            final int page = searchRequestDto.getPage();
-            final int size = searchRequestDto.getSize();
-            final int from = page <= 0 ? 0 : page * size;
+            int page = searchRequestDto.getPage();
+            int size = searchRequestDto.getSize();
+            int from = page <= 0 ? 0 : page * size;
 
-            log.debug("page = {}, size = {}", page, size);
-            log.debug("from = {}", from);
-
-            final SearchSourceBuilder builder = new SearchSourceBuilder()
+            SearchSourceBuilder builder = new SearchSourceBuilder()
                     .from(from)
                     .size(size)
                     .postFilter(getQueryBuilder(searchRequestDto));
@@ -80,9 +72,9 @@ public class SearchUtil {
      * @param date      : [Date] 검색 조건 날짜(gte)
      * @return          : [SearchRequest]
      */
-    public static SearchRequest buildSearchRequestByRangeQuery(final String indexName, final String field, final Date date) {
+    public static SearchRequest buildSearchRequestByRangeQuery(String indexName, String field, Date date) {
         try {
-            final SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(field, date));
+            SearchSourceBuilder builder = new SearchSourceBuilder().postFilter(getQueryBuilder(field, date));
             SearchRequest request = new SearchRequest(indexName);
             request.source(builder);
             return request;
@@ -100,13 +92,13 @@ public class SearchUtil {
      * @param date              : [Date] 검색 조건 날짜(gte)
      * @return                  : [SearchRequest]
      */
-    public static SearchRequest buildSearchRequestByBoolQuery(final String indexName, final SearchRequestDto searchRequestDto, final Date date) {
+    public static SearchRequest buildSearchRequestByBoolQuery(String indexName, SearchRequestDto searchRequestDto, Date date) {
         SearchRequest request = null;
         try {
-            final QueryBuilder searchQueryBuilder = getQueryBuilder(searchRequestDto);
-            final QueryBuilder dateQueryBuilder = getQueryBuilder("created_at", date);
+            QueryBuilder searchQueryBuilder = getQueryBuilder(searchRequestDto);
+            QueryBuilder dateQueryBuilder = getQueryBuilder("created_at", date);
 
-            final BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
+            BoolQueryBuilder boolQuery = QueryBuilders.boolQuery()
                 .must(searchQueryBuilder)
                 .must(dateQueryBuilder);
 
@@ -133,7 +125,7 @@ public class SearchUtil {
         return QueryBuilders.matchAllQuery();
     }
 
-    private static QueryBuilder getQueryBuilder(final SearchRequestDto searchRequestDto) {
+    private static QueryBuilder getQueryBuilder(SearchRequestDto searchRequestDto) {
         if (ObjectUtils.isEmpty(searchRequestDto)) {
             return null;
         }
@@ -144,15 +136,9 @@ public class SearchUtil {
         }
 
         if (fields.size() > 1) { // search multi field
-            MultiMatchQueryBuilder queryBuilder
-                    = QueryBuilders.multiMatchQuery(searchRequestDto.getSearchTerm())
+            MultiMatchQueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(searchRequestDto.getSearchTerm())
                         .type(MultiMatchQueryBuilder.Type.CROSS_FIELDS)
                         .operator(Operator.AND);
-
-            // 메소드 참조랑 동일
-            /*fields.forEach((n) -> {
-                queryBuilder.field(n)
-            });*/
 
             fields.forEach(queryBuilder::field);
             return queryBuilder;
@@ -166,7 +152,7 @@ public class SearchUtil {
                 .orElse(null);
     }
 
-    private static QueryBuilder getQueryBuilder(final String field, final Date date) {
+    private static QueryBuilder getQueryBuilder(String field, Date date) {
         return QueryBuilders.rangeQuery(field).gte(date);
     }
 }
