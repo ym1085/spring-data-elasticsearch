@@ -17,16 +17,14 @@ Spring Data Elasticsearch를 활용하여 검색 서비스를 구현하기 위�
 
 ## 3. 규격서(API Document)
 
-1. Recommend the [postman](https://www.postman.com/) api test tool.
-
-### 3-1 User(회원)
+### 3-1 User
 
 | CRUD             |HTTP| URI                            |
 |------------------|---|--------------------------------|
 | **단일 회원 검색**     |GET| /api/v1/user                   | 
 | **유저 등록**        |POST| /api/v1/user                   |
 
-### 3-2 Vehicle(차량)
+### 3-2 Vehicle
 
 | CRUD                           |HTTP| URI                     |
 |--------------------------------|---|-------------------------|
@@ -37,13 +35,13 @@ Spring Data Elasticsearch를 활용하여 검색 서비스를 구현하기 위�
 | **match, multi match 쿼리 기반 검색** |POST| /api/v1/vehicle/search |
 | **bool 쿼리 기반 검색**              |POST| /api/v1/vehicle/search/{date} |
 
-### 3-3 Index(인덱싱 관련)
+### 3-3 Index
 
 | CRUD              |HTTP| URI               |
 |-------------------|---|-------------------|
 | **인덱스 삭제 후 재 생성** |GET| /api/v1/index     |
 
-### 3-4 Sample data(샘플 데이터 관련)
+### 3-4 Sample data
 
 | CRUD            |HTTP| URI               |
 |-----------------|---|-------------------|

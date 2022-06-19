@@ -1,1 +1,3 @@
 rootProject.name = 'Spring-Data-Elasticsearch'
+include 'apis:search-api-server'
+include 'core:elastic-client'

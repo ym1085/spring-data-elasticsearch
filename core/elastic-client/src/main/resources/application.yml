@@ -1,0 +1,35 @@
+#server:
+#  port: 8080
+#
+#elasticsearch:
+#  url: localhost:9200
+#
+#spring:
+#  profiles:
+#    default: local
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/community?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: '1234!'
+#  devtools:
+#    livereload:
+#      enabled: true
+#    remote:
+#      restart:
+#        enabled: false
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#        show_sql: true
+#        format_sql: true
+#
+#logging:
+#  level:
+#    root: info
+#    com:
+#      elasticsearch: debug
+##  config: classpath:logback-${spring.profiles.active}.xml
+#  config: classpath:logback-spring.xml
