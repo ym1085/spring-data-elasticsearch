@@ -19,34 +19,34 @@ Spring Data Elasticsearch를 활용하여 검색 서비스를 구현하기 위�
 
 ### 3-1 User
 
-| CRUD         |HTTP| URI          |
-|--------------|---|--------------|
-| **전체 회원 검색** |GET| /api/v1/user |
-| **단일 회원 검색** |GET| /api/v1/user/{id} | 
-| **유저 등록**    |POST| /api/v1/user |
+| CRUD         |HTTP| URI       |
+|--------------|---|-----------|
+| **전체 회원 검색** |GET| /api/user |
+| **단일 회원 검색** |GET| /api/user/{id} | 
+| **유저 등록**    |POST| /api/user |
 
 ### 3-2 Vehicle
 
-| CRUD                           |HTTP| URI                     |
-|--------------------------------|---|-------------------------|
-| **전체 차량 검색**                   |GET| /api/v1/vehicle         |
-| **단일 차량 검색**                   |GET| /api/v1/vehicle/{id}    |
-| **날짜 기반 검색**                   |POST| /api/v1/vehicle/search/{date} |
-| **차량 등록**                      |POST| /api/v1/vehicle |
-| **match, multi match 쿼리 기반 검색** |POST| /api/v1/vehicle/search |
-| **bool 쿼리 기반 검색**              |POST| /api/v1/vehicle/search/{date} |
+| CRUD                           |HTTP| URI            |
+|--------------------------------|---|----------------|
+| **전체 차량 검색**                   |GET| /api/vehicle   |
+| **단일 차량 검색**                   |GET| /api/vehicle/{id} |
+| **날짜 기반 검색**                   |POST| /api/vehicle/search/{date} |
+| **차량 등록**                      |POST| /api/vehicle |
+| **match, multi match 쿼리 기반 검색** |POST| /api/vehicle/search |
+| **bool 쿼리 기반 검색**              |POST| /api/vehicle/search/{date} |
 
 ### 3-3 Index
 
-| CRUD              |HTTP| URI               |
-|-------------------|---|-------------------|
-| **인덱스 삭제 후 재 생성** |GET| /api/v1/index     |
+| CRUD              |HTTP| URI            |
+|-------------------|---|----------------|
+| **인덱스 삭제 후 재 생성** |GET| /api/index     |
 
 ### 3-4 Sample data
 
 | CRUD            |HTTP| URI               |
 |-----------------|---|-------------------|
-| **테스트 데이터 등록**  |POST| /api/v1/dummy/{indexName} |
+| **테스트 데이터 등록**  |POST| /api/dummy/{indexName} |
 
 ## 4. 참고 자료(Reference)
 
