@@ -1,8 +1,8 @@
 package com.elasticsearch.search.api.controller;
 
 import com.elasticsearch.core.document.Vehicle;
-import com.elasticsearch.core.dto.VehicleRequestDto;
-import com.elasticsearch.core.search.SearchRequestDto;
+import com.elasticsearch.core.search.dto.req.VehicleRequestDto;
+import com.elasticsearch.core.search.dto.req.SearchRequestDto;
 import com.elasticsearch.core.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +16,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@RestController
+@Slf4j
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Slf4j
+@RestController
 public class VehicleController {
 
     private final VehicleService vehicleService;

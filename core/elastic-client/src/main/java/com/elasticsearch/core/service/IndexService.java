@@ -18,9 +18,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-@Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
+@Service
 public class IndexService {
 
     private final List<String> INDICES_TO_CREATE = new ArrayList<>(Arrays.asList(IndicesHelper.VEHICLE_INDEX_NAME, IndicesHelper.USER_INDEX_NAME));
