@@ -1,4 +1,4 @@
-package com.elasticsearch.core.search;
+package com.elasticsearch.core.search.dto.req;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

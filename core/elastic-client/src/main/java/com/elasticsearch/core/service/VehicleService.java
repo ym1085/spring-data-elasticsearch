@@ -1,9 +1,9 @@
 package com.elasticsearch.core.service;
 
-import com.elasticsearch.core.dto.VehicleRequestDto;
+import com.elasticsearch.core.search.dto.req.VehicleRequestDto;
 import com.elasticsearch.core.helper.IndicesHelper;
 import com.elasticsearch.core.document.Vehicle;
-import com.elasticsearch.core.search.SearchRequestDto;
+import com.elasticsearch.core.search.dto.req.SearchRequestDto;
 import com.elasticsearch.core.search.util.SearchUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +27,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
+@Service
 public class VehicleService {
 
     private final ObjectMapper mapper = new ObjectMapper();

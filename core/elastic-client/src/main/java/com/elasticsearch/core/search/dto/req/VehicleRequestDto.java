@@ -1,4 +1,4 @@
-package com.elasticsearch.core.dto;
+package com.elasticsearch.core.search.dto.req;
 
 import com.elasticsearch.core.document.Vehicle;
 import lombok.Data;

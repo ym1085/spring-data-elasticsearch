@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@RestController
+@Slf4j
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Slf4j
+@RestController
 public class IndexController {
 
     private final IndexService indexService;

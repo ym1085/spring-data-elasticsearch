@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Slf4j
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Slf4j
+@RestController
 public class DummyDataController {
 
     private final DummyDataService dummyDataService;

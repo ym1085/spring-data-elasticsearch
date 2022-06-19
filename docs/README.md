@@ -61,10 +61,14 @@
 
 ### 02. 회원 API
 
-- [ ] 단일 회원 검색 시 PathVariable로 받도록 수정
+- [x] 단일 회원 검색 시 PathVariable로 받도록 수정
 - [ ] 전체 회원 조회 API 추가
 
 ### 03. 차량 API
 
 - [ ] 전체 차량 조회 API 수정
 - [ ] 날짜 기반 조회 API 안나오는 부분 수정
+
+### 참고 자료
+
+- [[문서] Elasticsearch Search API](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-search.html)

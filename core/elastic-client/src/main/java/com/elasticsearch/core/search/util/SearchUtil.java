@@ -1,6 +1,6 @@
 package com.elasticsearch.core.search.util;
 
-import com.elasticsearch.core.search.SearchRequestDto;
+import com.elasticsearch.core.search.dto.req.SearchRequestDto;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.search.SearchRequest;
@@ -13,8 +13,8 @@ import org.springframework.util.ObjectUtils;
 import java.util.Date;
 import java.util.List;
 
-@NoArgsConstructor
 @Slf4j
+@NoArgsConstructor
 public class SearchUtil {
 
     /**
